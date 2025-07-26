@@ -1,4 +1,10 @@
 # 📝 Rust ToDo CLI
+![License](https://img.shields.io/github/license/Niall-Sharma/RustCliTodo)
+![Issues](https://img.shields.io/github/issues/Niall-Sharma/RustCliTodo)
+![Forks](https://img.shields.io/github/forks/Niall-Sharma/RustCliTodo?style=social)
+![Stars](https://img.shields.io/github/stars/Niall-Sharma/RustCliTodo?style=social)
+![Last Commit](https://img.shields.io/github/last-commit/Niall-Sharma/RustCliTodo)
+![Build Status](https://github.com/Niall-Sharma/RustCliTodo/actions/workflows/rust.yml/badge.svg)
 
 A simple command-line to-do list application written in Rust. Manage your tasks directly from your terminal—add, list, complete, and remove them with ease!
 
