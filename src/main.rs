@@ -89,6 +89,23 @@ fn finish_task(id: &u32, tasks: &mut Vec<Task>) -> Result<(), Error> {
     }
 }
 
+fn add_task(description: &String, tasks: &mut Vec<Task>) -> Result<(), Error> {
+    let next_id = tasks.iter().map(|t| t.id).max().unwrap_or(0) + 1;
+
+    let task_obj = Task {
+        id: next_id,
+        description: description.to_owned(),
+        done: false,
+    };
+
+    tasks.push(task_obj);
+
+    let _ = save_task(&tasks);
+
+    println!("Saved Task!");
+    Ok(())
+}
+
 fn main() {
     let args = Cli::parse();
 
@@ -99,19 +116,7 @@ fn main() {
             let _ = finish_task(id, &mut tasks);
         }
         Command::Add { task } => {
-            let next_id = tasks.iter().map(|t| t.id).max().unwrap_or(0) + 1;
-
-            let task_obj = Task {
-                id: next_id,
-                description: task.to_owned(),
-                done: false,
-            };
-
-            tasks.push(task_obj);
-
-            let _ = save_task(&tasks);
-
-            println!("Saved Task!");
+            let _ = add_task(task, &mut tasks);
         }
         Command::Remove { id } => {
             let _ = remove_task(id, &mut tasks);
