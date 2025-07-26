@@ -1,4 +1,5 @@
 use clap::{Parser, Subcommand};
+use colored::Colorize;
 use serde::{Deserialize, Serialize};
 use serde_json;
 use std::fs;
@@ -118,11 +119,13 @@ fn main() {
         Command::List => {
             println!("TASK LIST");
             for task in &tasks {
+                let status = if task.done {
+                    "✔".green()
+                } else {
+                    "✗".red()
+                };
                 println!("===========================");
-                println!(
-                    "Name: {}\nID: {}\nDone: {}",
-                    task.description, task.id, task.done
-                );
+                println!("{}. {}: {}", task.id, task.description, status);
             }
         }
     }
