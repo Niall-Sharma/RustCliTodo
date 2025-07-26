@@ -3,6 +3,12 @@ use serde::{Deserialize, Serialize};
 use serde_json;
 use std::fs;
 use std::io::{Error, stdin};
+use std::path::Path;
+
+#[cfg(test)]
+mod tests;
+
+pub const TASKS_FILE_PATH: &str = "tasks.json";
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Task {
@@ -11,14 +17,14 @@ pub struct Task {
     done: bool,
 }
 
-pub fn save_task(tasks: &Vec<Task>) -> Result<(), Error> {
+pub fn save_task(tasks: &Vec<Task>, path: &Path) -> Result<(), Error> {
     let json = serde_json::to_string_pretty(tasks).unwrap();
 
-    fs::write("tasks.json", json)?;
+    fs::write(path, json)?;
     Ok(())
 }
 
-pub fn load_tasks() -> Result<Vec<Task>, Error> {
+pub fn load_tasks(path: &Path) -> Result<Vec<Task>, Error> {
     match fs::read_to_string("tasks.json") {
         Ok(data) => match serde_json::from_str(&data) {
             Ok(tasks) => Ok(tasks),
@@ -28,7 +34,7 @@ pub fn load_tasks() -> Result<Vec<Task>, Error> {
             }
         },
         Err(e) if e.kind() == std::io::ErrorKind::NotFound => {
-            fs::write("tasks.json", "[]")?;
+            fs::write(path, "[]")?;
             Ok(vec![])
         }
         Err(e) => {
@@ -46,7 +52,7 @@ pub fn remove_task(id: &u32, tasks: &mut Vec<Task>) -> Result<(), Error> {
     if before_length == after_length {
         println!("Could not find task");
     } else {
-        let _ = save_task(&tasks);
+        let _ = save_task(&tasks, Path::new(TASKS_FILE_PATH));
         println!("Removed Task {}", id)
     }
 
@@ -56,7 +62,7 @@ pub fn finish_task(id: &u32, tasks: &mut Vec<Task>) -> Result<(), Error> {
     if let Some(task) = tasks.iter_mut().find(|t| &t.id == id) {
         task.done = true;
 
-        let _ = save_task(&tasks);
+        let _ = save_task(&tasks, Path::new(TASKS_FILE_PATH));
         println!("Task Completed!");
         println!("Remove task? (N/y)");
         let mut confirmation = String::new();
@@ -84,7 +90,7 @@ pub fn add_task(description: &String, tasks: &mut Vec<Task>) -> Result<(), Error
 
     tasks.push(task_obj);
 
-    let _ = save_task(&tasks);
+    let _ = save_task(&tasks, Path::new(TASKS_FILE_PATH));
 
     println!("Saved Task!");
     Ok(())

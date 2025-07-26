@@ -1,5 +1,6 @@
 use clap::{Parser, Subcommand};
 use cli_todo::*;
+use std::path::Path;
 
 #[derive(Parser)]
 #[command(name = "ToDo")]
@@ -19,7 +20,7 @@ enum Command {
 fn main() {
     let args = Cli::parse();
 
-    let mut tasks: Vec<Task> = load_tasks().unwrap();
+    let mut tasks: Vec<Task> = load_tasks(Path::new(TASKS_FILE_PATH)).unwrap();
 
     match &args.command {
         Command::Finish { id } => {
