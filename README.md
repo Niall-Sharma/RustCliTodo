@@ -42,3 +42,33 @@ cli-todolist done <TASK ID> #marks task as completed
 cli-todolist list #lists all tasks in todo list
 ```
 Told you it was simple...
+
+## 🤝 Contributing
+
+Contributions are welcome! If you have an idea to improve the CLI, fix a bug, or add a feature, feel free to jump in.
+
+1. Fork the repository
+2. Create a new branch:
+
+    ```bash
+    git checkout -b your-feature
+    ```
+
+3. Make your changes
+
+4. Commit your changes:
+
+    ```bash
+    git commit -m "Add some feature"
+    ```
+
+5. Push to your branch:
+
+    ```bash
+    git push origin your-feature
+    ```
+
+6. Open a Pull Request
+
+Whether it's code, feedback, or ideas—every bit helps.  
+Thanks for helping make this tiny tool better!
