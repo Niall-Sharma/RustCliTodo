@@ -10,10 +10,10 @@ A simple command-line to-do list application written in Rust. Manage your tasks 
 
 ## 🚀 Features
 
-- Add tasks with a description
+- Add tasks to list
 - List all tasks with their status (done/undone)
 - Mark tasks as done
-- Delete tasks by ID
+- Delete tasks by task number
 - Save tasks to a local JSON file
 
 ## 📦 Installation
@@ -21,7 +21,7 @@ A simple command-line to-do list application written in Rust. Manage your tasks 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/rust-todo-cli.git
+    git clone https://github.com/yourusername/RustCliTodo.git
     cd rust-todo-cli
     ```
 
